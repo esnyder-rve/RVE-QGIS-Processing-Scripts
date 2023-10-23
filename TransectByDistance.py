@@ -63,7 +63,7 @@ class TransectDistance(QgsProcessingAlgorithm):
 
     def shortHelpString(self):
         return self.tr("Generates perpendicular transects along a polyline at a given distance and of a given length."
-            " The length is measured from the centerline to edge (i.e. if length = 50, then the total transect length will be 100)."
+            " The length is the entire length of the transect."
             " All units are in the units of the layer's CRS.")
 
 
@@ -132,6 +132,8 @@ class TransectDistance(QgsProcessingAlgorithm):
             self.LENGTH,
             context
         )
+
+        transect_length = transect_length / 2.0
         
         if transect_length is None:
             raise QgsProcessingException('Error: Transect length is required.')
